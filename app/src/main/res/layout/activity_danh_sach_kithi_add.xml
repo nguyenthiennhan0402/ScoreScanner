@@ -13,7 +13,7 @@
         android:background="#B7F1F8">
 
         <ImageButton
-            android:id="@+id/back_btn"
+            android:id="@+id/back_btnds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="304dp"

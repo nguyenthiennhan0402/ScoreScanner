@@ -13,7 +13,7 @@ import com.chaquo.python.PyObject;
 import com.chaquo.python.android.AndroidPlatform;
 import com.chaquo.python.android.PyApplication;
 
-import org.opencv.android.OpenCVLoader;
+//import org.opencv.android.OpenCVLoader;
 
 public class TestPython extends AppCompatActivity {
     TextView textView3;
@@ -23,11 +23,11 @@ public class TestPython extends AppCompatActivity {
         setContentView(R.layout.activity_test_python);
         textView3 = findViewById(R.id.textView3);
         
-        if(OpenCVLoader.initDebug()){
-            Toast.makeText(this, "Đã load được thư viện opencv", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "Chưa thêm thư viện", Toast.LENGTH_SHORT).show();
-        }
+//        if(OpenCVLoader.initDebug()){
+//            Toast.makeText(this, "Đã load được thư viện opencv", Toast.LENGTH_SHORT).show();
+//        }else{
+//            Toast.makeText(this, "Chưa thêm thư viện", Toast.LENGTH_SHORT).show();
+//        }
         if (! Python.isStarted()) {
             Python.start(new AndroidPlatform(this));
         }

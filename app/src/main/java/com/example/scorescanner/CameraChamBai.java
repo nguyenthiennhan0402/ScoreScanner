@@ -62,6 +62,8 @@ public class CameraChamBai extends AppCompatActivity {
     DataBase db = null;
     String makithi = "";
     String username = "";
+    Python py;
+    PyObject pyob;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
     static{
@@ -103,10 +105,11 @@ public class CameraChamBai extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(this));
         }
+        py = Python.getInstance();
+        pyob = py.getModule("betaTest");
         setContentView(R.layout.activity_camera_cham_bai);
         Intent intent = getIntent();
         makithi = intent.getStringExtra("kithi");
@@ -169,8 +172,8 @@ public class CameraChamBai extends AppCompatActivity {
 //            file = new File(Environment.getExternalStorageDirectory()+"/"+UUID.randomUUID().toString()+".jpg");
             File directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS + "/" + username+makithi);
             String name = UUID.randomUUID().toString();
-            file = new File(directory.getAbsolutePath()+"/"+ name +".jpg");
-            String strimg = directory.getAbsolutePath()+"/"+ name +".jpg";
+            file = new File(directory.getAbsolutePath()+"/" + name +".jpg");
+            String imguri = directory.getAbsolutePath()+"/"+ name + ".jpg";
             //them ten anh vao db
 
 //            Toast.makeText(CameraChamBai.this, msg, Toast.LENGTH_SHORT).show();
@@ -185,18 +188,20 @@ public class CameraChamBai extends AppCompatActivity {
                         buffer.get(bytes);
                         String s = Base64.getEncoder().encodeToString(bytes);
 
-
-
                         //lay he diem cua ki thi
                         int hediem = 10;
                         String masv = "000001";
                         String made = "";
-                        Python py = Python.getInstance();
-                        PyObject pyob = py.getModule("betaTest");
+
                         PyObject obj = pyob.callAttr("run1", s);
                         made = obj.toString();
-                        Log.d("==== BUG ===","--------------" + made + "-----------");
-//                        Toast.makeText(CameraChamBai.this, "" + made, Toast.LENGTH_SHORT).show();
+//                        Log.d("==== BUG ===","--------------" + made + "-----------");
+                        Toast.makeText(CameraChamBai.this, "" + made, Toast.LENGTH_SHORT).show();
+                        if(made.equals("###")){
+                            Toast.makeText(CameraChamBai.this, "Không nhận diện được mã đề!", Toast.LENGTH_SHORT).show();
+//                            save(bytes);
+                            return;
+                        }
                         Cursor c = db.mydatabase.query("kithi",null,"makithi=?",new String[]{makithi},null,null,null);
                         c.moveToFirst();
                         while (c.isAfterLast() == false)
@@ -208,9 +213,9 @@ public class CameraChamBai extends AppCompatActivity {
 //                        Toast.makeText(CameraChamBai.this, "" + hediem, Toast.LENGTH_SHORT).show();
                         //lay list ans cua ki thi
                         String strdapan = "";
-                        /*doan nay chay code python lay ma de*/
-
-//                        Cursor c2 = db.mydatabase.query("cauhoi",null,"makithi=? and made =?",new String[]{makithi, made},null,null,null);
+//                        /*doan nay chay code python lay ma de*/
+//
+////                        Cursor c2 = db.mydatabase.query("cauhoi",null,"makithi=? and made =?",new String[]{makithi, made},null,null,null);
                         Cursor c2 = db.mydatabase.rawQuery("select * from cauhoi where makithi = ? and made = ?",new  String[]{makithi, made});
                         c2.moveToFirst();
                         while (c2.isAfterLast() == false)
@@ -219,27 +224,30 @@ public class CameraChamBai extends AppCompatActivity {
                             c2.moveToNext();
                         }
                         c2.close();
-
-//                        Toast.makeText(CameraChamBai.this, "" + strdapan, Toast.LENGTH_SHORT).show();
-
-
-//                        xu ly python
-                        Python py2 = Python.getInstance();
-                        PyObject pyob2 = py.getModule("betaTest");
-                        PyObject obj2 = pyob.callAttr("run2", s,strdapan,hediem);
-
-                        String resultImg = obj2.toString();
-                        String[] list = resultImg.split("#####");
-                        Log.d("==== BUG ===","--------------" + made + "-----------");
-                        for(int i=0; i<list.length; i++)
-                            Log.d("==== BUG ===","--------------" + list[i] + "-----------");
-                        byte data[] = android.util.Base64.decode(list[1], android.util.Base64.DEFAULT);
+//
+////                        Toast.makeText(CameraChamBai.this, "" + strdapan, Toast.LENGTH_SHORT).show();
+//
+//
+////                        xu ly python
+                         obj = pyob.callAttr("run2", s,strdapan,hediem);
+                        String result = obj.toString();
+                        String[] list = result.split("#####");
+                        masv = list[0];
+                        String strdiem = list[1];
+                        String strimg = list[2];
+                        Log.d("bug","----------------" + strdiem + "------------");
+                        Float diemso = Float.parseFloat(strdiem);
+//                        Log.d("==== BUG ===","--------------" + made + "-----------");
+//                        for(int i=0; i<list.length; i++)
+//                            Log.d("==== BUG ===","--------------" + list[i] + "-----------");
+                        byte data[] = android.util.Base64.decode(strimg, android.util.Base64.DEFAULT);
                         //save img to database
                         ContentValues valuediem = new ContentValues();
                         valuediem.put("makithi",makithi );
-                        valuediem.put("diemso", 10);
-                        valuediem.put("hinhanh",strimg);
+                        valuediem.put("diemso", diemso);
+                        valuediem.put("hinhanh",imguri);
                         valuediem.put("masv", masv);
+                        Toast.makeText(CameraChamBai.this, "" + imguri, Toast.LENGTH_SHORT).show();
                         String msg  = "";
                         if(db.mydatabase.insert("diem",null,valuediem)==-1){
                             msg = "Fail to insert record";
@@ -281,7 +289,7 @@ public class CameraChamBai extends AppCompatActivity {
                 @Override
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-                    Toast.makeText(CameraChamBai.this, "Saved "+file, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CameraChamBai.this, "Saved "+file, Toast.LENGTH_SHORT).show();
                     createCameraPreview();
                 }
             };

@@ -36,7 +36,7 @@ public class MadeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_made);
         lvmade = findViewById(R.id.lvmade);
         Intent intent = getIntent();
-        backbtn = findViewById(R.id.back_btn);
+        backbtn = findViewById(R.id.back_btnds);
         String makithi = intent.getStringExtra("kithi");
         Toast.makeText(this, "makithi " + makithi, Toast.LENGTH_SHORT).show();
         mylist = new ArrayList<>();//tạo mới mảng rỗng

@@ -1,9 +1,6 @@
 package com.example.scorescanner;
 
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -12,7 +9,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,21 +20,12 @@ import android.widget.Toast;
 
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 
 public class MadeOptionAddActivity extends AppCompatActivity {
@@ -56,11 +43,11 @@ public class MadeOptionAddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_made_option_add);
-        backbtn = findViewById(R.id.backbtn);
+        backbtn = findViewById(R.id.backbtn3);
         txtmade = findViewById(R.id.txtmade);
 
 
-        viewAns = findViewById(R.id.addhandbtn11);
+//        viewAns = findViewById(R.id.addhandbtn11);
 
         addFileBtn = findViewById(R.id.dapanbtn);
         addHandBtn = findViewById(R.id.chambaibtn);
@@ -68,13 +55,14 @@ public class MadeOptionAddActivity extends AppCompatActivity {
         Intent intent = getIntent();
         makithi = intent.getStringExtra("kithi");
         made = intent.getStringExtra("made");
-        txtmade.setText("Mã đề "+made);
+//        Toast.makeText(this, "" + makithi, Toast.LENGTH_SHORT).show();
+        txtmade.setText("Nhập đán án kì thi");
         db = new DataBase(this);
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MadeOptionAddActivity.this.finish();
             }
         });
 
@@ -92,7 +80,7 @@ public class MadeOptionAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     Intent acti = new Intent(MadeOptionAddActivity.this, dapan_activity.class);
-                    acti.putExtra("kithi", makithi + "");
+                    acti.putExtra("kithi", makithi);
                     startActivity(acti);
                 }catch (Exception ex)
                 {
@@ -101,18 +89,18 @@ public class MadeOptionAddActivity extends AppCompatActivity {
             }
         });
 
-        viewAns.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    Intent acti = new Intent(MadeOptionAddActivity.this, MainActivityListAns.class);
-                    startActivity(acti);
-                }catch (Exception ex)
-                {
-                    Log.println(Log.DEBUG,"dapanbtn",ex.getMessage()+"");
-                }
-            }
-        });
+//        viewAns.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                try {
+//                    Intent acti = new Intent(MadeOptionAddActivity.this, MainActivityListAns.class);
+//                    startActivity(acti);
+//                }catch (Exception ex)
+//                {
+//                    Log.println(Log.DEBUG,"dapanbtn",ex.getMessage()+"");
+//                }
+//            }
+//        });
     }
 
     int requestCode = 1;

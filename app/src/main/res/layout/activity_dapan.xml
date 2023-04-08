@@ -13,7 +13,7 @@
         android:background="#B7F1F8">
 
         <ImageButton
-            android:id="@+id/back_btn"
+            android:id="@+id/back_btnds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#00000000"
@@ -29,14 +29,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
-            android:text="tên kì thi"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/save_btn"
             app:layout_constraintHorizontal_bias="0.142"
-            app:layout_constraintStart_toEndOf="@+id/back_btn"
+            app:layout_constraintStart_toEndOf="@+id/back_btnds"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.518" />
 

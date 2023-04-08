@@ -31,12 +31,12 @@ def sort4point(CntIn):
 def getCnt(img,minVal=-1,maxVal=-1):
 	# print('========== begin =========')
 	imggray =  cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-	blurred = cv2.GaussianBlur(imggray, (3, 3), 0)
+	# blurred = cv2.GaussianBlur(imggray, (3, 3), 0)
 	# edged = cv2.Canny(blurred, 50, 200)
 
-	edged = cv2.adaptiveThreshold(imggray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 7, 2)
+	edged = cv2.adaptiveThreshold(imggray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 	edged = cv2.bitwise_not(edged)
-	# show('edged',edged,900)
+# 	show('edged',edged,900)
 	# cv2.waitKey(0)
 
 	cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -47,10 +47,23 @@ def getCnt(img,minVal=-1,maxVal=-1):
 
 	img1 = img.copy()
 
+	h,w = img.shape[0:2]
+
 	for c in cnts:
 		peri = cv2.arcLength(c, True)
-		approx = cv2.approxPolyDP(c, 4, True)
+		approx = cv2.approxPolyDP(c, 6, True)
 		area = cv2.contourArea(approx)
+
+		# print(len(approx))
+		# if area >= h*w*80/100:
+		# 	x,y,w,h = cv2.boundingRect(approx)
+		# 	# cv2.rectangle(img1,(x,y),(x+w,y+h),(0,255,0),3)
+		# 	cv2.rectangle(img1,(0,0),(150,150),(0,255,0),3)
+		# 	cv2.drawContours(img1, c, -1, (0,255,0), 3)
+		# 	show('img1',img1,900)
+		# 	cv2.waitKey(0)
+		# 	img = four_point_transform(img, approx.reshape(4, 2))
+		# 	return []
 		
 		if len(approx)==4 and ((minVal<=area and area<=maxVal and minVal!=-1 and maxVal!=-1)
 			or (minVal<=area and minVal!=-1 and maxVal==-1)
@@ -71,10 +84,14 @@ def getCnt(img,minVal=-1,maxVal=-1):
 	# 	cv2.putText(img1, "{}".format(i), (neoCnt[i][0][0][0], neoCnt[i][0][0][1]),
 	# 							cv2.FONT_HERSHEY_SIMPLEX, 1.75, (0, 0, 255), 2)
 	# cv2.drawContours(img1,neoCnt, -1, (0,255,0), 3)
+# 	print(len(cnts))
+# 	print(minVal)
+# 	print(maxVal)
+# 	print(len(neoCnt))
 
 	# cv2.drawContours(img1, cnts, -1, (0,255,0), 3)
-	# cv2.drawContours(img1, neoCnt, -1, (0,255,0), 3)
-	# show('img1',img1,900)
+	cv2.drawContours(img1, neoCnt, -1, (0,255,0), 3)
+# 	show('img1',img1,900)
 	# show('img',img,900)
 
 	neoCnt = sortArray4point(neoCnt)
@@ -87,14 +104,14 @@ def getCnt(img,minVal=-1,maxVal=-1):
 	return neoCnt
 
 def transform_img_input(img):
-	minnn, maxxx = 1500, 2100
+	minnn, maxxx = 1600, 2200
 	listCnt = np.array(getCnt(img,minnn,maxxx))
 	while len(listCnt) != 8:
 		# print(len(listCnt))
 		# if len(listCnt) < 8:
 		minnn = minnn - 100
 		maxxx = maxxx - 100
-		if(minnn) == 500:
+		if minnn <= 0:
 			return
 		# else:
 		# minnn = minnn + 100
@@ -218,7 +235,6 @@ def findAns(img,listCircle,num,isVertical,strAnswer=None):
 				break
 			idTrueAns = ['A','B','C','D'].index(stringans[int(index/4)])
 
-
 		bubbled = []
 		for (j,(x,y)) in enumerate(cnts):
 			mask = np.zeros(thresh.shape, dtype="uint8").copy()
@@ -229,31 +245,31 @@ def findAns(img,listCircle,num,isVertical,strAnswer=None):
 				bubbled.append(j)
 		if strAnswer != None:
 			if len(bubbled)==0:
-				color = (0,255,255)  # (b,g,r)  (r,g,b)
+				color = (0,255,255)
 				x,y = cnts[idTrueAns]
 				cv2.circle(img, (x, y), 14, color, 3)
 				anschoose.append('#')
 			elif len(bubbled)==1:
 				if idTrueAns==bubbled[0]:
 					dem = dem+1
-					color = (0,255,0)  # (b,g,r)  (r,g,b)
+					color = (0,255,0) 
 					x,y = cnts[bubbled[0]]
 					cv2.circle(img, (x, y), 14, color, 3)
 					anschoose.append(bubbled[0])
 				else:
-					color = (0,255,255)  # (b,g,r)  (r,g,b)
+					color = (0,255,255)  
 					x,y = cnts[idTrueAns]
 					cv2.circle(img, (x, y), 14, color, 3)
-					color = (0,0,255)  # (b,g,r)  (r,g,b)
+					color = (0,0,255)  
 					x,y = cnts[bubbled[0]]
 					cv2.circle(img, (x, y), 14, color, 3)
 					anschoose.append(bubbled[0])
 			else:
+				color = (0,0,255)  
 				for i in range(0,len(bubbled)):
-					color = (0,0,255)  # (b,g,r)  (r,g,b)
-					x,y = cnts[bubbled[0]]
+					x,y = cnts[bubbled[i]]
 					cv2.circle(img, (x, y), 14, color, 3)
-				color = (0,255,255)  # (b,g,r)  (r,g,b)
+				color = (0,255,255)
 				x,y = cnts[idTrueAns]
 				cv2.circle(img, (x, y), 14, color, 3)
 		else:
@@ -277,7 +293,7 @@ def get_Sbd_and_maDe(img,returnMade):
 	while len(neoCnt) != 3:
 		minnn = minnn - 100
 		maxxx = maxxx - 100
-		if minnn==0:
+		if minnn <= 0:
 			return
 		neoCnt = getCnt(img.copy(),minnn,maxxx)
 	# print(minnn)
@@ -317,7 +333,7 @@ def get_ans(img,stringans):
 	while len(neoCnt) != 14:
 		minnn = minnn - 100
 		maxxx = maxxx - 100
-		if minnn==0:
+		if minnn <= 0: 
 			return
 		neoCnt = getCnt(img.copy(),minnn,maxxx)
 	listIMGcrop = crop_ans_to_10_img(img,neoCnt)
@@ -329,7 +345,7 @@ def get_ans(img,stringans):
 	for i in range(0,int(len(stringans)/5+1)):
 		circles = detect_circlesv2(listIMGcrop[i],5,4)
 		# print(str(i)+'  '+str(len(circles)))
-		stringansss = 'ABCD'
+		stringansss = 'AA'
 		if i*5+5 < len(stringans):
 			stringansss = stringans[i*5:i*5+5]
 		else:
@@ -374,7 +390,7 @@ def detect_circles(img):
 	for (x,y,r) in circles:
 		cv2.circle(img, (x, y), 11, (0,0,0), 1)
 
-	show("Result", img, 900)
+# 	show("Result", img, 900)
 	cv2.waitKey(0)
 	return circles
 
@@ -390,87 +406,126 @@ def string2img(stringIMG):
     return img
 
 def run1(stringimage):
-# 	return 'loiday'
-	# imgpath = 'images/Test22-choose.png'
-	# img = cv2.imread(imgpath).copy()
-	img = string2img(stringimage)
-	img = cv2.resize(img,(1654,2339),interpolation = cv2.INTER_CUBIC)
-	# brightened_img = cv2.convertScaleAbs(img, alpha=1.2, beta=0)
-	# img = brightened_img
-	# gray =  cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-	# thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 2)
-	# show('thresh',thresh,1000)
-	# cv2.waitKey(0)
-	img = transform_img_input(img)
-	img = cv2.resize(img,(1466,2136),interpolation = cv2.INTER_CUBIC)
-	# show('img',img,1000)
-	# cv2.waitKey(0)
+	try:
+		# imgpath = 'images/Test22-choose.png'
+		# img = cv2.imread(imgpath).copy()
+		img = string2img(stringimage)
+		img = cv2.resize(img,(1654,2339),interpolation = cv2.INTER_CUBIC)
+		# brightened_img = cv2.convertScaleAbs(img, alpha=1.2, beta=0)
+		# img = brightened_img
+		# gray =  cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+		# thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 2)
+		# show('thresh',thresh,1000)
+		# cv2.waitKey(0)
+		img = transform_img_input(img)
+		img = cv2.resize(img,(1466,2136),interpolation = cv2.INTER_CUBIC)
+		# show('img',img,1000)
+		# cv2.waitKey(0)
 
-	minnn1, maxxx1 = 1500,2100
-	neoBigCnt = getCnt(img,minnn1,maxxx1)
-	while len(neoBigCnt) != 8:
-		minnn1 = minnn1 - 100
-		maxxx1 = maxxx1 - 100
-		if minnn1==0:
-			return
+		minnn1, maxxx1 = 1500,2100
 		neoBigCnt = getCnt(img,minnn1,maxxx1)
-	neoBigCnt = np.array(neoBigCnt)
+		while len(neoBigCnt) != 8:
+			minnn1 = minnn1 - 100
+			maxxx1 = maxxx1 - 100
+			if minnn1 <= 0:
+				neoBigCnt = None
+				break
+			neoBigCnt = getCnt(img,minnn1,maxxx1)
+		neoBigCnt = np.array(neoBigCnt)
 
-	img_sbd_and_made = crop_1(img,neoBigCnt)
-	maDe = get_Sbd_and_maDe(img_sbd_and_made,True)
+		img_sbd_and_made = crop_1(img,neoBigCnt)
+		maDe = get_Sbd_and_maDe(img_sbd_and_made,True)
 
-	# print('made: '+maDe)
-	return maDe[0]
+		# print('made: '+maDe)
+		if '#' in maDe[0]:
+			return '###'
+		else:
+			return maDe[0]
+	except Exception as ex:
+# 		print('Lỗi run1: ',str(ex))
+		return '###'
 
 def run2(stringimage,ansTrue,HeDiem):
-	img = string2img(stringimage)
-	img = cv2.resize(img,(1654,2339),interpolation = cv2.INTER_CUBIC)
-	img = transform_img_input(img)
-	img = cv2.resize(img,(1466,2136),interpolation = cv2.INTER_CUBIC)
+	try:
+		img = string2img(stringimage)
+		img = cv2.resize(img,(1654,2339),interpolation = cv2.INTER_CUBIC)
+		img = transform_img_input(img)
+		img = cv2.resize(img,(1466,2136),interpolation = cv2.INTER_CUBIC)
 
-	minnn1, maxxx1 = 1500,2100
-	neoBigCnt = getCnt(img,minnn1,maxxx1)
-	while len(neoBigCnt) != 8:
-		minnn1 = minnn1 - 100
-		maxxx1 = maxxx1 - 100
+		minnn1, maxxx1 = 1500,2100
 		neoBigCnt = getCnt(img,minnn1,maxxx1)
-		if minnn1==0:
-			return
-	neoBigCnt = np.array(neoBigCnt)
+		while len(neoBigCnt) != 8:
+			minnn1 = minnn1 - 100
+			maxxx1 = maxxx1 - 100
+			if minnn1 <= 0:
+				neoBigCnt == None
+				break
+			neoBigCnt = getCnt(img,minnn1,maxxx1)
+		neoBigCnt = np.array(neoBigCnt)
 
-	img_sbd_and_made = crop_1(img,neoBigCnt)
-	sbd, maDe = get_Sbd_and_maDe(img_sbd_and_made,False)
+		img_sbd_and_made = crop_1(img,neoBigCnt)
+		sbd, maDe = get_Sbd_and_maDe(img_sbd_and_made,False)
 
-	img_ans = crop_2(img,neoBigCnt)
-	anschoose = get_ans(img_ans,ansTrue)
+		img_ans = crop_2(img,neoBigCnt)
+		anschoose = get_ans(img_ans,ansTrue)
 
-	diemMoiCau = HeDiem/len(ansTrue)
-	sumdiem = 0
-	# print('diem moi cau    '+str(diemMoiCau))
+		diemMoiCau = HeDiem/len(ansTrue)
+		sumdiem = 0
+		# print('diem moi cau    '+str(diemMoiCau))
 
-	for tup in anschoose:
-		sumdiem = sumdiem + diemMoiCau*tup[1]
+		for tup in anschoose:
+			sumdiem = sumdiem + diemMoiCau*tup[1]
 
-	# print('sumdiem    '+str(sumdiem))
-	# show('img',img,1000)
-	# show('img_sbd_and_made',img_sbd_and_made,700)
-	# show('img_ans',img_ans,900)
-	# cv2.waitKey(0)
+		cv2.putText(img, "{}/{}".format(np.round(sumdiem,2),HeDiem), (740,570),
+								cv2.FONT_HERSHEY_SIMPLEX, 1.75, (0,0,255), 4)
 
-	stringimgreturn = img2string(img)
-
-	return (str(sumdiem)+"#####"+stringimgreturn)
+		sumdiem = np.round(sumdiem,3)
+		# print('sumdiem    '+str(sumdiem))
+		# show('img',img,1000)
+		# show('img_sbd_and_made',img_sbd_and_made,700)
+		# show('img_ans',img_ans,900)
+		# cv2.waitKey(0)
+		stringimgreturn = img2string(img)
+		if '#' not in sbd[0]:
+			return '{}#####{}#####{}'.format(sbd[0],sumdiem,stringimgreturn)
+		else:
+			return '000000#####{}#####{}'.format(sumdiem,stringimgreturn)
+	except Exception as ex:
+# 		print('Lỗi run2: ', str(ex))
+		return '999999#####0.0#####{}'.format(stringimage)
 
 ########## end ##########
 
-# imgpath = 'images/real5.jpg'
-##img = cv2.imread(imgpath).copy()
-##strngimg = img2string(img)
-# print(len(strngimg))
-##run111 = run1(strngimg)
-##print(run111)
-# rum222 = run2(strngimg,'ABABAACDABDACABCDABD',10)
-# print(rum222[1])
-# imgg = string2img(rum222[0])
-# show('imgg',imgg,900)
+# import pathlib, os
+# data_dir = pathlib.Path('images')
+# image_list = list(data_dir.glob('*.png'))+list(data_dir.glob('*.jpg'))
+# image_list.sort(key=os.path.getctime)
+# # image_list.reverse()
+# dem = 0
+# image_list = ['images/real9.jpg']
+#
+# for i in range(0,len(image_list)):
+# 	print('========== begin ==========')
+#
+# 	imgpath = str(image_list[i])
+# 	print('\tindex   ',i)
+# 	print('\tpath   ',imgpath)
+# 	img = cv2.imread(imgpath).copy()
+# 	strngimg = img2string(img)
+# 	made = run1(strngimg)
+# 	print('\tmade   ',made)
+# 	if '#' not in made:
+# 		ans = run2(strngimg,'ABABAACDABDACABCDABDABCDABCDAB',10)
+# 		print('\tans   ',ans[:50])
+# 		if '999999' not in ans:
+# 			dem=dem+1
+# 			listres = ans.split('#####')
+# 			print('\tsbd   ',listres[0])
+# 			print('\tdiem   ',listres[1])
+# 			imgg = string2img(listres[2])
+# 			show(imgpath,imgg,900)
+#
+# 	print('==========  end  ==========')
+# print('XONG')
+# print('dem  ',dem,' / ',len(image_list))
 # cv2.waitKey(0)

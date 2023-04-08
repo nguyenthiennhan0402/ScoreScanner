@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -36,6 +37,7 @@ public class Baidacham extends AppCompatActivity {
         while (c.isAfterLast() == false)
         {
             String imguri = c.getString(2);
+//            Toast.makeText(Baidacham.this, "" + imguri, Toast.LENGTH_SHORT).show();
             String masv = c.getString(3);
             Student std = new Student(masv,imguri);
             mylist.add(std);
@@ -43,7 +45,7 @@ public class Baidacham extends AppCompatActivity {
         }
         grvimg.setAdapter(myimgadater);
         myimgadater.notifyDataSetChanged();
-
+        c.close();
     }
 
 }

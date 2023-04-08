@@ -27,23 +27,20 @@ public class testLoadAnh extends AppCompatActivity {
         testimg = findViewById(R.id.testimg);
         textView2 = findViewById(R.id.textView2);
         db = new DataBase(this);
-//        Cursor c = db.mydatabase.rawQuery("select * from diem ", null);
-//        c.moveToFirst();
-//        String data ="";
-//        byte[] bytes = new byte[0];
-//        while (c.isAfterLast() == false)
-//        {
-//            bytes = c.getBlob(2);
-//            c.moveToNext();
-//        }
+        Cursor c = db.mydatabase.rawQuery("select * from diem ", null);
+        c.moveToFirst();
+        String data ="";
+        data = c.getString(2);
+
 //        ByteArrayInputStream imageStream = new ByteArrayInputStream(bytes);
 //        Bitmap theImage= BitmapFactory.decodeStream(imageStream);
 //        Toast.makeText(db, "" + bytes[0], Toast.LENGTH_SHORT).show();
 //        testimg.setImageBitmap(theImage);
 //        c.close();
-        File directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS + "/" + "tnhan1");
+//        File directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS + "/" + "tnhan1");
 //        file = new File(directory.getAbsolutePath()+"/"+ name +".jpg");
-        Uri imgUri=Uri.parse(directory.getAbsolutePath() + "/2.jpg");
+//        Uri imgUri=Uri.parse(directory.getAbsolutePath() + "/1.jpg");
+        Uri imgUri=Uri.parse(data);
         textView2.setText(imgUri.toString());
         testimg.setImageURI(imgUri);
     }

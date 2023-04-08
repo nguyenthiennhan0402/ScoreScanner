@@ -13,7 +13,7 @@
         android:background="#B7F1F8">
 
         <ImageButton
-            android:id="@+id/backbtn"
+            android:id="@+id/backbtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="296dp"
@@ -31,12 +31,11 @@
             android:layout_marginStart="70dp"
             android:layout_marginEnd="152dp"
             android:layout_marginBottom="24dp"
-            android:text="Mã đề"
             android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/backbtn" />
+            app:layout_constraintStart_toEndOf="@+id/backbtn3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -134,51 +133,6 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="312dp"
-            android:layout_height="79dp"
-            android:layout_marginTop="328dp"
-            android:layout_marginEnd="48dp"
-            android:background="@drawable/rounded_bg"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageView52"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="220dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/camera" />
-
-            <Button
-                android:id="@+id/addhandbtn11"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
-                android:backgroundTint="#00000000"
-                android:paddingLeft="40dp"
-                android:paddingTop="10dp"
-                android:paddingRight="70dp"
-                android:paddingBottom="10dp"
-                android:text="xem"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView52"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

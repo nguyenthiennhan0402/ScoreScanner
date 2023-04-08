@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,10 @@ public class ImageAdapter extends ArrayAdapter<Student> {
 //        byte [] encodeByte = Base64.decode(imgName,Base64.DEFAULT);
 //        Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
 //        imagebailam.setImageBitmap(bitmap);
+
+//        file = new File(directory.getAbsolutePath()+"/"+ name +".jpg");
+//        File directory = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS + "/" + "tnhan1");
+//        Uri imgUri=Uri.parse(directory.getAbsolutePath() + "/1.jpg");
         Uri imgUri=Uri.parse(imgpath);
         imagebailam.setImageURI(imgUri);
         btnxoaimg.setOnClickListener(new View.OnClickListener() {

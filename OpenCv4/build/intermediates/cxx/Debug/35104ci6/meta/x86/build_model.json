@@ -1,0 +1,170 @@
+{
+  "abi": "X86",
+  "info": {
+    "abi": "X86",
+    "bitness": 32,
+    "deprecated": false,
+    "default": true
+  },
+  "cxxBuildFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\.cxx\\Debug\\35104ci6\\x86",
+  "soFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\build\\intermediates\\cxx\\Debug\\35104ci6\\obj\\x86",
+  "soRepublishFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\build\\intermediates\\cmake\\debug\\obj\\x86",
+  "abiPlatformVersion": 26,
+  "cmake": {
+    "effectiveConfiguration": {
+      "inheritEnvironments": [],
+      "variables": []
+    }
+  },
+  "variant": {
+    "buildSystemArgumentList": [
+      "-DANDROID_STL\u003dc++_shared"
+    ],
+    "cFlagsList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": [
+      "opencv_jni_shared"
+    ],
+    "implicitBuildTargetSet": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "module": {
+      "cxxFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\.cxx",
+      "intermediatesBaseFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\build\\intermediates",
+      "intermediatesFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\build\\intermediates\\cxx",
+      "gradleModulePathName": ":OpenCv4",
+      "moduleRootFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4",
+      "moduleBuildFile": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\build.gradle",
+      "makeFile": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\libcxx_helper\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "ndkFolder": "D:\\SDK_AndroidStudio\\ndk\\21.4.7075529",
+      "ndkVersion": "21.4.7075529",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "LIBCXX_STATIC",
+      "ndkMetaPlatforms": {
+        "min": 16,
+        "max": 30,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29,
+          "R": 30
+        }
+      },
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "cmakeToolchainFile": "D:\\SDK_AndroidStudio\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake",
+      "cmake": {
+        "isValidCmakeAvailable": true,
+        "cmakeExe": "D:\\SDK_AndroidStudio\\cmake\\3.18.1\\bin\\cmake.exe",
+        "minimumCmakeVersion": "3.18.1"
+      },
+      "stlSharedObjectMap": {
+        "LIBCXX_SHARED": {
+          "ARMEABI_V7A": "D:\\SDK_AndroidStudio\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
+          "ARM64_V8A": "D:\\SDK_AndroidStudio\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
+          "X86": "D:\\SDK_AndroidStudio\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+          "X86_64": "D:\\SDK_AndroidStudio\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "SYSTEM": {}
+      },
+      "project": {
+        "rootBuildGradleFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner",
+        "sdkFolder": "D:\\SDK_AndroidStudio",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isPrefabEnabled": false
+      },
+      "outputOptions": [],
+      "ninjaExe": "D:\\SDK_AndroidStudio\\cmake\\3.18.1\\bin\\ninja.exe"
+    },
+    "prefabClassPaths": [],
+    "prefabPackages": [],
+    "prefabPackageConfigurations": [],
+    "stlType": "c++_shared",
+    "optimizationTag": "Debug"
+  },
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "prefabFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\.cxx\\Debug\\35104ci6\\prefab\\x86",
+  "isActiveAbi": true,
+  "fullConfigurationHash": "35104ci6t49k4n5vg6d5i1y5x3t3f3v6f6h4w4b6p4766d4334162yd6l6y",
+  "configurationArguments": [
+    "-HD:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\libcxx_helper",
+    "-DCMAKE_SYSTEM_NAME\u003dAndroid",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON",
+    "-DCMAKE_SYSTEM_VERSION\u003d26",
+    "-DANDROID_PLATFORM\u003dandroid-26",
+    "-DANDROID_ABI\u003dx86",
+    "-DCMAKE_ANDROID_ARCH_ABI\u003dx86",
+    "-DANDROID_NDK\u003dD:\\SDK_AndroidStudio\\ndk\\21.4.7075529",
+    "-DCMAKE_ANDROID_NDK\u003dD:\\SDK_AndroidStudio\\ndk\\21.4.7075529",
+    "-DCMAKE_TOOLCHAIN_FILE\u003dD:\\SDK_AndroidStudio\\ndk\\21.4.7075529\\build\\cmake\\android.toolchain.cmake",
+    "-DCMAKE_MAKE_PROGRAM\u003dD:\\SDK_AndroidStudio\\cmake\\3.18.1\\bin\\ninja.exe",
+    "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dD:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\build\\intermediates\\cxx\\Debug\\35104ci6\\obj\\x86",
+    "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dD:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\build\\intermediates\\cxx\\Debug\\35104ci6\\obj\\x86",
+    "-DCMAKE_BUILD_TYPE\u003dDebug",
+    "-BD:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\.cxx\\Debug\\35104ci6\\x86",
+    "-GNinja",
+    "-DANDROID_STL\u003dc++_shared"
+  ],
+  "stlLibraryFile": "D:\\SDK_AndroidStudio\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+  "intermediatesParentFolder": "D:\\packup cdio\\ScoreScanner\\ScoreScanner\\OpenCv4\\build\\intermediates\\cxx\\Debug\\35104ci6"
+}

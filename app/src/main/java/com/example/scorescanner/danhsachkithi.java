@@ -8,14 +8,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import org.apache.xmlbeans.impl.xb.xsdschema.TopLevelAttribute;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,7 +37,7 @@ public class danhsachkithi extends AppCompatActivity {
         setContentView(R.layout.activity_danhsachkithi);
         lvdanhsachkt = findViewById(R.id.lvdanhsachkt);
         addbtn = findViewById(R.id.addbtn);
-        backbtn = findViewById(R.id.back_btn);
+        backbtn = findViewById(R.id.back_btnds);
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         processCopy();
@@ -68,7 +65,7 @@ public class danhsachkithi extends AppCompatActivity {
         lvdanhsachkt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(danhsachkithi.this, "click", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(danhsachkithi.this, "click", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -79,7 +76,7 @@ public class danhsachkithi extends AppCompatActivity {
                 String makithi = mylist.get(i).getMakithi() + "";
                 made.putExtra("makithi", makithi);
                 made.putExtra("username", username);
-                Toast.makeText(danhsachkithi.this, "makithi " +  mylist.get(i).getMakithi(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(danhsachkithi.this, "makithi " +  mylist.get(i).getMakithi(), Toast.LENGTH_SHORT).show();
                 startActivity(made);
             }
         });
@@ -88,8 +85,7 @@ public class danhsachkithi extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Home = new Intent(danhsachkithi.this,HomeActivity.class);
-                startActivity(Home);
+                danhsachkithi.this.finish();
             }
         });
         addbtn.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +105,7 @@ public class danhsachkithi extends AppCompatActivity {
             Intent result = getIntent();
             String username2 = result.getStringExtra("username");
 //            Toast.makeText(this, "vao ham result", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "User name " + username, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "User name " + username, Toast.LENGTH_SHORT).show();
             String tenkithi = data.getStringExtra("tenkithi");
             int socau = data.getIntExtra("socau",20);
             int hediem = data.getIntExtra("hediem",10);
@@ -134,7 +130,6 @@ public class danhsachkithi extends AppCompatActivity {
             }
         }
     }
-    // Hàm thêm bài hát vào Listview trên Tab Danh sách bài hát
     private void loadkithi(String username2) {
         mylist.clear();
         Cursor c = database.rawQuery("select * from kithi where username = '" + username2 + "'", null);

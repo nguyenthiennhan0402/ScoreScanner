@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ScoreScanner"
 include ':app'
-include ':OpenCv4'

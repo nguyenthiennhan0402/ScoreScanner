@@ -14,11 +14,13 @@
         android:textSize="26dp" />
 
     <RadioGroup
+        android:id="@+id/radiogroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="horizontal">
+<!--        android:checkedButton="@+id/btnA">-->
 
         <RadioButton
             android:id="@+id/btnA"
@@ -31,6 +33,7 @@
             android:button="@null"
             android:gravity="center"
             android:text="A"
+            android:checked = "true"
             android:textSize="26dp" />
 
         <RadioButton
@@ -74,4 +77,5 @@
             android:text="D"
             android:textSize="26dp" />
     </RadioGroup>
+
 </LinearLayout>

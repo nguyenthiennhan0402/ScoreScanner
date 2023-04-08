@@ -1,1 +1,0 @@
-D:\CDIO\ScoreScanner\OpenCv4\libcxx_helper\CMakeLists.txt

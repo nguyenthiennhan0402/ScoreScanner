@@ -19,7 +19,7 @@ import android.os.Environment;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +32,7 @@ import java.io.OutputStream;
 public class MadeOption extends AppCompatActivity {
     TextView txtmade;
     Button dapanbtn,chambaibtn,baidachambtn,xuatdiembtn,thongkebtn;
-    ImageView backbtn;
+    ImageButton backbtn;
 
     Uri imageUri;
     String DB_PATH_SUFFIX = "/databases/";
@@ -46,21 +46,34 @@ public class MadeOption extends AppCompatActivity {
             setContentView(R.layout.activity_made_option);
             dapanbtn = findViewById(R.id.dapanbtn);
             chambaibtn = findViewById(R.id.chambaibtn);
-            xuatdiembtn = findViewById(R.id.xuatdiembtn);
+//            xuatdiembtn = findViewById(R.id.xuatdiembtn);
             thongkebtn = findViewById(R.id.thongkebtn);
 
-            backbtn = findViewById(R.id.backbtn);
+            backbtn = findViewById(R.id.back_btnds);
             baidachambtn = findViewById(R.id.baidachambtn);
 
             txtmade = findViewById(R.id.txtmade);
             Intent intent = getIntent();
             String makithi = intent.getStringExtra("makithi");
+//            Toast.makeText(this, ""+ makithi, Toast.LENGTH_SHORT).show();
             String username =  intent.getStringExtra("username");
 //        String made = intent.getStringExtra("made");
             txtmade.setText("Kì thi "+makithi);
 
 //        Toast.makeText(MadeOption.this, "Ki thi " + makithi + " made " + made, Toast.LENGTH_SHORT).show();
-
+            backbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MadeOption.this.finish();
+                }
+            });
+            thongkebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent testload = new Intent(MadeOption.this, testLoadAnh.class);
+                    startActivity(testload);
+                }
+            });
             dapanbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -200,7 +213,7 @@ public class MadeOption extends AppCompatActivity {
                 File directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
                 File mypath = new File(directory.getAbsolutePath()+"/myimg.jpg");
 
-                Toast.makeText(this, mypath+"", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, mypath+"", Toast.LENGTH_SHORT).show();
                 FileOutputStream fos = null;
                 try {
                     fos = new FileOutputStream(mypath);
